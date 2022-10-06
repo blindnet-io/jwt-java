@@ -10,13 +10,14 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.UUID;
 
 public class Token {
     private static final JsonMapper jsonMapper = new JsonMapper();
 
     private final Type type;
 
-    private final String appId;
+    private final UUID appId;
     private final Instant expiration;
     private final String userId;
 
@@ -45,11 +46,11 @@ public class Token {
         return token;
     }
 
-    Token(Type type, String appId, String userId) {
+    Token(Type type, UUID appId, String userId) {
         this(type, appId, Instant.now().plus(15, ChronoUnit.MINUTES), userId);
     }
 
-    Token(Type type, String appId, Instant expiration, String userId) {
+    Token(Type type, UUID appId, Instant expiration, String userId) {
         this.type = type;
         this.appId = appId;
         this.expiration = expiration;
@@ -60,7 +61,7 @@ public class Token {
         return type;
     }
 
-    public String getAppId() {
+    public UUID getAppId() {
         return appId;
     }
 

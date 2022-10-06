@@ -1,10 +1,16 @@
 package io.blindnet.jwt;
 
+import java.util.UUID;
+
 public class TokenBuilder {
-    private final String appId;
+    private final UUID appId;
     private final TokenPrivateKey key;
 
     public TokenBuilder(String appId, TokenPrivateKey key) {
+        this(UUID.fromString(appId), key);
+    }
+
+    public TokenBuilder(UUID appId, TokenPrivateKey key) {
         this.appId = appId;
         this.key = key;
     }
