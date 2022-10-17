@@ -26,4 +26,11 @@
             <version>1.70</version>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>blindnet-snapshots</id>
+            <url>https://nexus.blindnet.io/repository/maven-snapshots</url>
+        </repository>
+    </distributionManagement>
 </project>
