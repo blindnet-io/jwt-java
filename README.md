@@ -50,7 +50,11 @@ Add the library to your project's dependencies:
 ### Gradle
 
 ```kotlin
-implementation("io.blindnet:jwt-java:1.0-SNAPSHOT")
+maven {
+    url = uri("https://nexus.blindnet.io/repository/maven-snapshots")
+}
+
+implementation("io.blindnet:jwt-java:1.0.0-SNAPSHOT")
 ```
 
 ## Usage
