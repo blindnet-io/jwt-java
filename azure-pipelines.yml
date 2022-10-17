@@ -16,6 +16,8 @@ steps:
   - task: JavaToolInstaller@0
     inputs:
       versionSpec: '8'
+      jdkArchitectureOption: x64
+      jdkSourceOption: PreInstalled
   - task: MavenAuthenticate@0
     inputs:
       mavenServiceConnections: 'blindnet-maven-snapshots'
