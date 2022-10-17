@@ -35,10 +35,15 @@ Add the library to your project's dependencies:
 ### Maven
 
 ```xml
+<repository>
+    <id>blindnet-snapshots</id>
+    <url>https://nexus.blindnet.io/repository/maven-snapshots</url>
+</repository>
+
 <dependency>
     <groupId>io.blindnet</groupId>
     <artifactId>jwt-java</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
