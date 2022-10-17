@@ -1,0 +1,21 @@
+trigger:
+  - develop
+
+pr:
+  branches:
+    exclude:
+      - '*'
+
+resources:
+  - repo: self
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '8'
+  - task: Maven@3
+    inputs:
+      goals: 'javadoc:jar source:jar deploy'

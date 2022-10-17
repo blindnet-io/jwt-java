@@ -28,9 +28,9 @@
     </dependencies>
 
     <distributionManagement>
-        <repository>
+        <snapshotRepository>
             <id>blindnet-snapshots</id>
             <url>https://nexus.blindnet.io/repository/maven-snapshots</url>
-        </repository>
+        </snapshotRepository>
     </distributionManagement>
 </project>
