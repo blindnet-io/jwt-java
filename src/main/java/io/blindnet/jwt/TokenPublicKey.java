@@ -58,7 +58,7 @@ public class TokenPublicKey {
      * @return whether the token signature is valid
      */
     public boolean verify(Token token) {
-        return verify(token.data().getBytes(StandardCharsets.UTF_8), Base64.getDecoder().decode(token.getSignature()));
+        return verify(token.data().getBytes(StandardCharsets.UTF_8), Base64.getUrlDecoder().decode(token.getSignature()));
     }
 
     /**
