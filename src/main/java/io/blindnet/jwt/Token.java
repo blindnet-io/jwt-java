@@ -43,8 +43,8 @@ public class Token {
         TokenPayload payload;
 
         try {
-            header = jsonMapper.readValue(Base64.getDecoder().decode(split[0]), TokenHeader.class);
-            payload = jsonMapper.readValue(Base64.getDecoder().decode(split[1]), TokenPayload.class);
+            header = jsonMapper.readValue(Base64.getUrlDecoder().decode(split[0]), TokenHeader.class);
+            payload = jsonMapper.readValue(Base64.getUrlDecoder().decode(split[1]), TokenPayload.class);
         } catch (IOException e) {
             throw new IllegalArgumentException("Invalid token", e);
         }
@@ -120,8 +120,8 @@ public class Token {
         TokenPayload payload = new TokenPayload(appId, expiration != null ? expiration.getEpochSecond() : null, userId);
 
         try {
-            return Base64.getEncoder().encodeToString(jsonMapper.writeValueAsBytes(header)) + "." +
-                    Base64.getEncoder().encodeToString(jsonMapper.writeValueAsBytes(payload));
+            return Base64.getUrlEncoder().encodeToString(jsonMapper.writeValueAsBytes(header)) + "." +
+                    Base64.getUrlEncoder().encodeToString(jsonMapper.writeValueAsBytes(payload));
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Token JSON encoding failed", e);
         }
