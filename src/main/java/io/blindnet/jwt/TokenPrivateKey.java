@@ -68,7 +68,7 @@ public class TokenPrivateKey {
      * @return the signed token, for chaining
      */
     public Token sign(Token token) {
-        token.setSignature(Base64.getUrlEncoder().encodeToString(sign(token.data().getBytes(StandardCharsets.UTF_8))));
+        token.setSignature(Base64.getUrlEncoder().withoutPadding().encodeToString(sign(token.data().getBytes(StandardCharsets.UTF_8))));
         return token;
     }
 

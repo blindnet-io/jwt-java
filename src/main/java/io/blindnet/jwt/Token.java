@@ -120,8 +120,8 @@ public class Token {
         TokenPayload payload = new TokenPayload(appId, expiration != null ? expiration.getEpochSecond() : null, userId);
 
         try {
-            return Base64.getUrlEncoder().encodeToString(jsonMapper.writeValueAsBytes(header)) + "." +
-                    Base64.getUrlEncoder().encodeToString(jsonMapper.writeValueAsBytes(payload));
+            return Base64.getUrlEncoder().withoutPadding().encodeToString(jsonMapper.writeValueAsBytes(header)) + "." +
+                    Base64.getUrlEncoder().withoutPadding().encodeToString(jsonMapper.writeValueAsBytes(payload));
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Token JSON encoding failed", e);
         }
