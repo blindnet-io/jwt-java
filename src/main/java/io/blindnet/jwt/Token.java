@@ -122,7 +122,7 @@ public class Token {
      * @return the string representation of the data part of this token
      */
     public String data() {
-        if(data != null) {
+        if(data == null) {
             TokenHeader header = new TokenHeader("EdDSA", type.getJson());
             TokenPayload payload = new TokenPayload(appId, expiration != null ? expiration.getEpochSecond() : null, userId);
 
