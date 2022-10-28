@@ -26,6 +26,7 @@ public class Token {
     private final Instant expiration;
     private final String userId;
 
+    private String data;
     private String signature;
 
     /**
@@ -53,6 +54,7 @@ public class Token {
             throw new IllegalArgumentException("Invalid token algorithm");
 
         Token token = new Token(Type.fromJson(header.typ), payload.app, Instant.ofEpochSecond(payload.exp), payload.uid);
+        token.setData(split[0] + "." + split[1]);
         token.setSignature(split[2]);
         return token;
     }
@@ -94,6 +96,10 @@ public class Token {
         return userId;
     }
 
+    private void setData(String data) {
+        this.data = data;
+    }
+
     /**
      * Returns the signature of this token, if any.<br>
      * Parsed tokens (using {@link Token#parse(String)}) and tokens created with a {@link TokenBuilder}
@@ -116,15 +122,19 @@ public class Token {
      * @return the string representation of the data part of this token
      */
     public String data() {
-        TokenHeader header = new TokenHeader("EdDSA", type.getJson());
-        TokenPayload payload = new TokenPayload(appId, expiration != null ? expiration.getEpochSecond() : null, userId);
+        if(data != null) {
+            TokenHeader header = new TokenHeader("EdDSA", type.getJson());
+            TokenPayload payload = new TokenPayload(appId, expiration != null ? expiration.getEpochSecond() : null, userId);
 
-        try {
-            return Base64.getUrlEncoder().withoutPadding().encodeToString(jsonMapper.writeValueAsBytes(header)) + "." +
-                    Base64.getUrlEncoder().withoutPadding().encodeToString(jsonMapper.writeValueAsBytes(payload));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Token JSON encoding failed", e);
+            try {
+                data = Base64.getUrlEncoder().withoutPadding().encodeToString(jsonMapper.writeValueAsBytes(header)) + "." +
+                        Base64.getUrlEncoder().withoutPadding().encodeToString(jsonMapper.writeValueAsBytes(payload));
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("Token JSON encoding failed", e);
+            }
         }
+
+        return data;
     }
 
     /**
