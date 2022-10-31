@@ -4,4 +4,5 @@ module io.blindnet.jwt {
     requires org.bouncycastle.provider;
 
     exports io.blindnet.jwt;
+    exports io.blindnet.jwt.json to com.fasterxml.jackson.databind;
 }
